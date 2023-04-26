@@ -101,14 +101,15 @@ class IOMap {
 		 * \param map Is the map class
 		 * \returns true if the monsters spawn map custom was loaded successfully
 		 */
-		static bool loadMonstersCustom(Map* map, const std::string &mapName, int customMapIndex) {
+		static bool loadMonstersCustom(Map* map) {
 			if (map->monsterfile.empty()) {
 				// OTBM file doesn't tell us about the monsterfile,
 				// Lets guess it is mapname-monster.xml.
-				map->monsterfile = mapName;
+				map->monsterfile = g_configManager().getString(MAP_CUSTOM_NAME);
 				map->monsterfile += "-monster.xml";
 			}
-			return map->spawnsMonsterCustomMaps[customMapIndex].loadFromXML(map->monsterfile);
+
+			return map->spawnsMonsterCustom.loadFromXML(map->monsterfile);
 		}
 
 		/**
@@ -116,15 +117,15 @@ class IOMap {
 		 * \param map Is the map class
 		 * \returns true if the npcs spawn map custom was loaded successfully
 		 */
-		static bool loadNpcsCustom(Map* map, const std::string &mapName, int customMapIndex) {
+		static bool loadNpcsCustom(Map* map) {
 			if (map->npcfile.empty()) {
 				// OTBM file doesn't tell us about the npcfile,
 				// Lets guess it is mapname-npc.xml.
-				map->npcfile = mapName;
+				map->npcfile = g_configManager().getString(MAP_CUSTOM_NAME);
 				map->npcfile += "-npc.xml";
 			}
 
-			return map->spawnsNpcCustomMaps[customMapIndex].loadFromXml(map->npcfile);
+			return map->spawnsNpcCustom.loadFromXml(map->npcfile);
 		}
 
 		/**
@@ -132,14 +133,15 @@ class IOMap {
 		 * \param map Is the map class
 		 * \returns true if the map custom houses was loaded successfully
 		 */
-		static bool loadHousesCustom(Map* map, const std::string &mapName, int customMapIndex) {
+		static bool loadHousesCustom(Map* map) {
 			if (map->housefile.empty()) {
 				// OTBM file doesn't tell us about the housefile,
 				// Lets guess it is mapname-house.xml.
-				map->housefile = mapName;
+				map->housefile = g_configManager().getString(MAP_CUSTOM_NAME);
 				map->housefile += "-house.xml";
 			}
-			return map->housesCustomMaps[customMapIndex].loadHousesXML(map->housefile);
+
+			return map->housesCustom.loadHousesXML(map->housefile);
 		}
 
 		const std::string &getLastErrorString() const {

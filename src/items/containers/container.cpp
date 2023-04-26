@@ -191,12 +191,12 @@ uint32_t Container::getWeight() const {
 	return Item::getWeight() + totalWeight;
 }
 
-std::string Container::getContentDescription(bool oldProtocol) const {
+std::string Container::getContentDescription() const {
 	std::ostringstream os;
-	return getContentDescription(os, oldProtocol).str();
+	return getContentDescription(os).str();
 }
 
-std::ostringstream &Container::getContentDescription(std::ostringstream &os, bool oldProtocol) const {
+std::ostringstream &Container::getContentDescription(std::ostringstream &os) const {
 	bool firstitem = true;
 	for (ContainerIterator it = iterator(); it.hasNext(); it.advance()) {
 		Item* item = *it;
@@ -212,11 +212,7 @@ std::ostringstream &Container::getContentDescription(std::ostringstream &os, boo
 			os << ", ";
 		}
 
-		if (oldProtocol) {
-			os << item->getNameDescription();
-		} else {
-			os << "{" << item->getID() << "|" << item->getNameDescription() << "}";
-		}
+		os << "{" << item->getID() << "|" << item->getNameDescription() << "}";
 	}
 
 	if (firstitem) {
