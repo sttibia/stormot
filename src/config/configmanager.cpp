@@ -1,10 +1,5 @@
 /**
- * Canary - A free and open-source MMORPG server emulator
- * Copyright (©) 2019-2022 OpenTibiaBR <opentibiabr@outlook.com>
- * Repository: https://github.com/opentibiabr/canary
- * License: https://github.com/opentibiabr/canary/blob/main/LICENSE
- * Contributors: https://github.com/opentibiabr/canary/graphs/contributors
- * Website: https://docs.opentibiabr.com/
+ * Oliveira - A Private source MMORPG server emulator
  */
 
 #include "pch.hpp"
@@ -97,18 +92,18 @@ bool ConfigManager::load() {
 		boolean[TOGGLE_MAP_CUSTOM] = getGlobalBoolean(L, "toggleMapCustom", true);
 
 		string[IP] = getGlobalString(L, "ip", "127.0.0.1");
-		string[MAP_NAME] = getGlobalString(L, "mapName", "canary");
+		string[MAP_NAME] = getGlobalString(L, "mapName", "happen");
 		string[MAP_DOWNLOAD_URL] = getGlobalString(L, "mapDownloadUrl", "");
-		string[MAP_AUTHOR] = getGlobalString(L, "mapAuthor", "Eduardo Dantas");
+		string[MAP_AUTHOR] = getGlobalString(L, "mapAuthor", "Oliveira");
 
 		string[MAP_CUSTOM_NAME] = getGlobalString(L, "mapCustomName", "");
-		string[MAP_CUSTOM_AUTHOR] = getGlobalString(L, "mapCustomAuthor", "OTServBR");
+		string[MAP_CUSTOM_AUTHOR] = getGlobalString(L, "mapCustomAuthor", "Oliveira");
 
 		string[HOUSE_RENT_PERIOD] = getGlobalString(L, "houseRentPeriod", "never");
 		string[MYSQL_HOST] = getGlobalString(L, "mysqlHost", "127.0.0.1");
 		string[MYSQL_USER] = getGlobalString(L, "mysqlUser", "root");
 		string[MYSQL_PASS] = getGlobalString(L, "mysqlPass", "");
-		string[MYSQL_DB] = getGlobalString(L, "mysqlDatabase", "canary");
+		string[MYSQL_DB] = getGlobalString(L, "mysqlDatabase", "otserv");
 		string[MYSQL_SOCK] = getGlobalString(L, "mysqlSock", "");
 
 		integer[SQL_PORT] = getGlobalNumber(L, "mysqlPort", 3306);
@@ -122,8 +117,6 @@ bool ConfigManager::load() {
 		integer[PREMIUM_DEPOT_LIMIT] = getGlobalNumber(L, "premiumDepotLimit", 8000);
 		integer[DEPOT_BOXES] = getGlobalNumber(L, "depotBoxes", 20);
 		integer[STASH_ITEMS] = getGlobalNumber(L, "stashItemCount", 5000);
-
-		boolean[OLD_PROTOCOL] = getGlobalBoolean(L, "allowOldProtocol", false);
 	}
 
 	boolean[ALLOW_CHANGEOUTFIT] = getGlobalBoolean(L, "allowChangeOutfit", true);
@@ -233,6 +226,9 @@ bool ConfigManager::load() {
 	integer[BLACK_SKULL_DURATION] = getGlobalNumber(L, "blackSkullDuration", 45);
 	integer[ORANGE_SKULL_DURATION] = getGlobalNumber(L, "orangeSkullDuration", 7);
 	integer[GLOBAL_SERVER_SAVE_NOTIFY_DURATION] = getGlobalNumber(L, "globalServerSaveNotifyDuration", 5);
+	integer[STATS_DUMP_INTERVAL] = getGlobalNumber(L, "statsDumpInterval", 30000);
+	integer[STATS_SLOW_LOG_TIME] = getGlobalNumber(L, "statsSlowLogTime", 10);
+	integer[STATS_VERY_SLOW_LOG_TIME] = getGlobalNumber(L, "statsVerySlowLogTime", 50);
 
 	integer[PARTY_LIST_MAX_DISTANCE] = getGlobalNumber(L, "partyListMaxDistance", 0);
 
@@ -267,7 +263,6 @@ bool ConfigManager::load() {
 	integer[FORGE_INFLUENCED_CREATURES_LIMIT] = getGlobalNumber(L, "forgeInfluencedLimit", 300);
 	integer[FORGE_FIENDISH_CREATURES_LIMIT] = getGlobalNumber(L, "forgeFiendishLimit", 3);
 
-	floating[BESTIARY_RATE_CHARM_SHOP_PRICE] = getGlobalFloat(L, "bestiaryRateCharmShopPrice", 1.0);
 	floating[RATE_HEALTH_REGEN] = getGlobalFloat(L, "rateHealthRegen", 1.0);
 	floating[RATE_HEALTH_REGEN_SPEED] = getGlobalFloat(L, "rateHealthRegenSpeed", 1.0);
 	floating[RATE_MANA_REGEN] = getGlobalFloat(L, "rateManaRegen", 1.0);
@@ -314,6 +309,19 @@ bool ConfigManager::load() {
 	boolean[TOGGLE_GOLD_POUCH_ALLOW_ANYTHING] = getGlobalBoolean(L, "toggleGoldPouchAllowAnything", false);
 	boolean[TOGGLE_SERVER_IS_RETRO] = getGlobalBoolean(L, "toggleServerIsRetroPVP", false);
 	boolean[TOGGLE_TRAVELS_FREE] = getGlobalBoolean(L, "toggleTravelsFree", false);
+
+	integer[HAZARDSYSTEM_CRITICAL_INTERVAL] = getGlobalNumber(L, "hazardSystem_criticalInterval", 2000);
+	integer[HAZARDSYSTEM_CRITICAL_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_criticalMultiplier", 25);
+	integer[HAZARDSYSTEM_DAMAGE_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_damageMultiplier", 200);
+	integer[HAZARDSYSTEM_DODGE_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_dodgeMultiplier", 85);
+	integer[HAZARDSYSTEM_PODS_DROP_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_podsDropMultiplier", 87);
+	integer[HAZARDSYSTEM_PODS_TIME_TO_DAMAGE] = getGlobalNumber(L, "hazardSystem_podsTimeToDamage", 2000);
+	integer[HAZARDSYSTEM_PODS_TIME_TO_SPAWN] = getGlobalNumber(L, "hazardSystem_podsTimeToSpawn", 4000);
+	integer[HAZARDSYSTEM_EXP_BONUS_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_expBonusMultiplier", 2);
+	integer[HAZARDSYSTEM_LOOT_BONUS_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_lootBonusMultiplier", 2);
+	integer[HAZARDSYSTEM_PODS_DAMAGE] = getGlobalNumber(L, "hazardSystem_podsDamage", 5);
+	integer[HAZARDSYSTEM_SPAWN_PLUNDER_MULTIPLIER] = getGlobalNumber(L, "hazardSystem_spawnPlunderMultiplier", 25);
+	boolean[HAZARDSYSTEM_ENABLED] = getGlobalBoolean(L, "hazardSystem_enable", true);
 
 	loaded = true;
 	lua_close(L);

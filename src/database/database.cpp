@@ -8,7 +8,6 @@
  */
 
 #include "pch.hpp"
-
 #include "config/configmanager.h"
 #include "database/database.h"
 
@@ -119,7 +118,7 @@ bool Database::executeQuery(const std::string &query) {
 
 	// executes the query
 	databaseLock.lock();
-
+	
 	while (mysql_real_query(handle, query.c_str(), query.length()) != 0) {
 		SPDLOG_ERROR("Query: {}", query.substr(0, 256));
 		SPDLOG_ERROR("Message: {}", mysql_error(handle));
@@ -132,6 +131,7 @@ bool Database::executeQuery(const std::string &query) {
 	}
 
 	MYSQL_RES* m_res = mysql_store_result(handle);
+	
 	databaseLock.unlock();
 
 	if (m_res) {
@@ -173,6 +173,7 @@ retry:
 		}
 		goto retry;
 	}
+
 	databaseLock.unlock();
 
 	// retrieving results of query

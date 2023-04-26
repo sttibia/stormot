@@ -76,7 +76,6 @@ class Game {
 		 * \param filename Is the map custom name (Example: "map".otbm, not is necessary add extension .otbm)
 		 * \returns true if the custom map was loaded successfully
 		 */
-		bool loadCustomMaps(const std::string &customMapPath);
 		bool loadCustomMap(const std::string &filename);
 		void loadMap(const std::string &path, const Position &pos = Position(), bool unload = false);
 
@@ -325,6 +324,7 @@ class Game {
 		void playerRequestOpenContainerFromDepotSearch(uint32_t playerId, const Position &pos);
 		void playerMoveThingFromDepotSearch(Player* player, uint16_t itemId, uint8_t tier, uint8_t count, const Position &fromPos, const Position &toPos, bool allItems = false);
 
+		void playerRequestInventoryImbuements(uint32_t playerId);
 		void playerRequestAddVip(uint32_t playerId, const std::string &name);
 		void playerRequestRemoveVip(uint32_t playerId, uint32_t guid);
 		void playerRequestEditVip(uint32_t playerId, uint32_t guid, const std::string &description, uint32_t icon, bool notify);
@@ -355,7 +355,6 @@ class Game {
 		void parsePlayerExtendedOpcode(uint32_t playerId, uint8_t opcode, const std::string &buffer);
 
 		static void updatePremium(account::Account &account);
-		void updatePlayerHelpers(Player* player);
 
 		void cleanup();
 		void shutdown();
