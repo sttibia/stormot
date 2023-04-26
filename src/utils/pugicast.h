@@ -1,12 +1,7 @@
 /**
- * Canary - A free and open-source MMORPG server emulator
- * Copyright (©) 2019-2022 OpenTibiaBR <opentibiabr@outlook.com>
- * Repository: https://github.com/opentibiabr/canary
- * License: https://github.com/opentibiabr/canary/blob/main/LICENSE
- * Contributors: https://github.com/opentibiabr/canary/graphs/contributors
- * Website: https://docs.opentibiabr.com/
+ * Oliveira - A Private source MMORPG server emulator
  */
-
+ 
 #ifndef SRC_UTILS_PUGICAST_H_
 #define SRC_UTILS_PUGICAST_H_
 

@@ -1,10 +1,5 @@
 /**
- * Canary - A free and open-source MMORPG server emulator
- * Copyright (©) 2019-2022 OpenTibiaBR <opentibiabr@outlook.com>
- * Repository: https://github.com/opentibiabr/canary
- * License: https://github.com/opentibiabr/canary/blob/main/LICENSE
- * Contributors: https://github.com/opentibiabr/canary/graphs/contributors
- * Website: https://docs.opentibiabr.com/
+ * Oliveira - A Private source MMORPG server emulator
  */
 
 #ifndef SRC_UTILS_UTILS_DEFINITIONS_HPP_
@@ -255,6 +250,14 @@ enum MagicEffectClasses : uint8_t {
 	CONST_ME_DEVOVORGA = 239,
 	CONST_ME_FERUMBRAS_2 = 240,
 
+	CONST_ME_WHITE_SMOKE = 241,
+	CONST_ME_WHITE_SMOKES = 242,
+	CONST_ME_WATER_DROP = 243,
+	CONST_ME_AVATAR_APPEAR = 244,
+	CONST_ME_DIVINE_GRENADE = 245, // Permanent
+	CONST_ME_DIVINE_EMPOWERMENT = 246, // Permanent
+	CONST_ME_WATER_FLOATING_THRASH = 247,
+
 	CONST_ME_LAST = CONST_ME_DIVINE_DAZZLE,
 };
 
@@ -346,8 +349,7 @@ enum SpeakClasses : uint8_t {
 	TALKTYPE_MONSTER_SAY = 36,
 	TALKTYPE_MONSTER_YELL = 37,
 
-	TALKTYPE_MONSTER_LAST_OLDPROTOCOL = 38, /* Dont forget about the CHANNEL_R2*/
-	TALKTYPE_CHANNEL_R2 = 0xFF // #d
+	TALKTYPE_CHANNEL_R2 = 0xFF, // #d
 };
 
 enum MessageClasses : uint8_t {
@@ -375,8 +377,6 @@ enum MessageClasses : uint8_t {
 	MESSAGE_GUILD = 33, /* White message in channel (+ channelId)*/
 	MESSAGE_PARTY_MANAGEMENT = 34, /* Green message in game window and in the console*/
 	MESSAGE_PARTY = 35, /* White message on the console*/
-
-	MESSAGE_LAST_OLDPROTOCOL = 37, /* Last Message on old protocol*/
 
 	MESSAGE_REPORT = 38, /* White message on the game window and in the console*/
 	MESSAGE_HOTKEY_PRESSED = 39, /* Green message in game window and in the console*/
@@ -591,6 +591,8 @@ enum ItemID_t : uint16_t {
 	ITEM_STORE_INBOX = 23396,
 	ITEM_SUPPLY_STASH = 28750,
 
+	ITEM_PRIMAL_POD = 39176, // Client ID
+
 	ITEM_MALE_CORPSE = 4240,
 	ITEM_FEMALE_CORPSE = 4247,
 
@@ -665,6 +667,7 @@ enum ItemID_t : uint16_t {
 	ITEM_FORGE_CORE = 37110,
 	ITEM_EXALTATION_CHEST = 37561,
 	ITEM_PODIUM_OF_VIGOUR = 38707,
+	ITEM_DIVINE_EMPOWERMENT_WOD = 40450,
 
 	ITEM_NONE = 0
 };

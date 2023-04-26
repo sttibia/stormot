@@ -99,40 +99,32 @@ bool Map::loadMap(const std::string &identifier, bool mainMap /*= false*/, bool 
 	return true;
 }
 
-bool Map::loadMapCustom(const std::string &mapName, bool loadHouses, bool loadMonsters, bool loadNpcs, int customMapIndex) {
+bool Map::loadMapCustom(const std::string &identifier, bool loadHouses, bool loadMonsters, bool loadNpcs) {
 	// Load the map
-	std::string path = g_configManager().getString(DATA_DIRECTORY) + "/world/custom/" + mapName + ".otbm";
-	this->load(path, Position(0, 0, 0), true);
-	this->load(path);
+	this->load(identifier, Position(0, 0, 0), true);
+	this->load(identifier);
 
 	if (loadMonsters) {
-		if (!IOMap::loadMonstersCustom(this, mapName, customMapIndex)) {
+		if (!IOMap::loadMonstersCustom(this)) {
 			SPDLOG_WARN("Failed to load monster custom data");
 		}
 	}
 
 	if (loadHouses) {
-		if (!IOMap::loadHousesCustom(this, mapName, customMapIndex)) {
+		if (!IOMap::loadHousesCustom(this)) {
 			SPDLOG_WARN("Failed to load house custom data");
 		}
+
+		IOMapSerialize::loadHouseInfo();
+		IOMapSerialize::loadHouseItems(this);
 	}
 
 	if (loadNpcs) {
-		if (!IOMap::loadNpcsCustom(this, mapName, customMapIndex)) {
+		if (!IOMap::loadNpcsCustom(this)) {
 			SPDLOG_WARN("Failed to load npc custom spawn data");
 		}
 	}
-
-	// Files need to be cleaned up or will try to load previous map files again
-	this->monsterfile.clear();
-	this->housefile.clear();
-	this->npcfile.clear();
 	return true;
-}
-
-void Map::loadHouseInfo() {
-	IOMapSerialize::loadHouseInfo();
-	IOMapSerialize::loadHouseItems(this);
 }
 
 bool Map::save() {

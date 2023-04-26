@@ -1,14 +1,9 @@
 /**
- * Canary - A free and open-source MMORPG server emulator
- * Copyright (©) 2019-2022 OpenTibiaBR <opentibiabr@outlook.com>
- * Repository: https://github.com/opentibiabr/canary
- * License: https://github.com/opentibiabr/canary/blob/main/LICENSE
- * Contributors: https://github.com/opentibiabr/canary/graphs/contributors
- * Website: https://docs.opentibiabr.com/
+ * Oliveira - A Private source MMORPG server emulator
  */
 
 #include "pch.hpp"
-
+#include <fmt/chrono.h>
 #include "core.hpp"
 #include "utils/tools.h"
 
@@ -357,7 +352,9 @@ std::string formatDate(time_t time) {
 
 std::string formatDateShort(time_t time) {
 	try {
-		return fmt::format("{:%Y-%m-%d %X}", fmt::localtime(time));
+		// return fmt::format("{:%Y-%m-%d %X}", fmt::localtime(time));
+		const auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		return fmt::format("{:%d/%m/%Y %H:%M:%S}", fmt::localtime(t));
 	} catch (const std::out_of_range &exception) {
 		SPDLOG_ERROR("Failed to format date short with error code {}", exception.what());
 	}
@@ -785,9 +782,7 @@ std::string getCombatName(CombatType_t combatType) {
 }
 
 CombatType_t getCombatType(const std::string &combatname) {
-	auto it = std::find_if(combatTypeNames.begin(), combatTypeNames.end(), [combatname](const std::pair<CombatType_t, std::string> &pair) {
-		return pair.second == combatname;
-	});
+	auto it = std::find_if(combatTypeNames.begin(), combatTypeNames.end(), [combatname](const std::pair<CombatType_t, std::string> &pair) { return pair.second == combatname; });
 
 	return it != combatTypeNames.end() ? it->first : COMBAT_NONE;
 }
@@ -951,17 +946,17 @@ bool booleanString(const std::string &str) {
 std::string getWeaponName(WeaponType_t weaponType) {
 	switch (weaponType) {
 		case WEAPON_SWORD:
-			return "stabbing weapon";
+			return "sword";
 		case WEAPON_CLUB:
-			return "blunt instrument";
+			return "club";
 		case WEAPON_AXE:
-			return "cutting weapon";
+			return "axe";
 		case WEAPON_DISTANCE:
-			return "firearm";
+			return "distance";
 		case WEAPON_WAND:
-			return "wand/rod";
-		case WEAPON_MISSILE:
-			return "missile";
+			return "wand";
+		case WEAPON_AMMO:
+			return "ammunition";
 		default:
 			return std::string();
 	}
@@ -1372,9 +1367,7 @@ void capitalizeWords(std::string &source) {
  */
 void consoleHandlerExit() {
 	SPDLOG_ERROR("The program will close after pressing the enter key...");
-	if (isatty(STDIN_FILENO)) {
-		getchar();
-	}
+	getchar();
 	return;
 }
 
